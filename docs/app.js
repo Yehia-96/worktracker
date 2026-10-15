@@ -37,7 +37,8 @@
     month: new Date().getMonth(), syncing: false, highlight: null,
   };
   const settings = () => ({ ...WT.DEFAULT_SETTINGS, ...(cache.settings || {}) });
-  const trackingStart = () => cache.trackingStart || '2000-01-01';
+  // Before the PC's settings arrive, start counting missing days from the first logged day.
+  const trackingStart = () => cache.trackingStart || Object.keys(cache.entries).sort()[0] || WT.todayKey();
   const entry = (key) => { const e = cache.entries[key]; return e && !e.deleted ? e : null; };
   const yearEntries = (year) => {
     const out = {};
@@ -296,7 +297,7 @@
     const s = settings();
     const push = await pushStatus();
     const pushRow = !isStandalone()
-      ? `<p class="small">To get reminders, install the app first: tap <b>Share</b> ${icon('download', 14)} in Safari, then <b>Add to Home Screen</b>, and open Work Tracker from your Home Screen.</p>`
+      ? `<p class="small">To get reminders, install the app first: tap the <b>Share</b> button (square with an arrow) in Safari, then <b>Add to Home Screen</b>, and open Work Tracker from your Home Screen.</p>`
       : push === 'on' ? `<div class="set-line"><span>${icon('check', 16)} Notifications are on</span><button class="btn ghost sm" data-test-push>Test</button></div>`
       : push === 'denied' ? '<p class="small">Notifications are blocked. Allow them in iPhone Settings → Notifications → Work Tracker.</p>'
       : push === 'unsupported' ? '<p class="small">This browser can’t receive notifications. iOS 16.4 or newer is required.</p>'

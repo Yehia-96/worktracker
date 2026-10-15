@@ -19,12 +19,12 @@ function fileStorage(file) {
 }
 
 class Sync {
-  constructor(store, { onRemoteChange }) {
+  constructor(store, { onRemoteChange, client }) {
     this.store = store;
     this.onRemoteChange = onRemoteChange;
     this.running = null;
     this.lastError = null;
-    this.client = createClient(WTConfig.SUPABASE_URL, WTConfig.SUPABASE_KEY, {
+    this.client = client || createClient(WTConfig.SUPABASE_URL, WTConfig.SUPABASE_KEY, {
       auth: { storage: fileStorage(path.join(store.dir, 'auth-session.json')), persistSession: true, autoRefreshToken: true, detectSessionInUrl: false },
     });
   }

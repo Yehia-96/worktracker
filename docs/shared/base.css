@@ -65,7 +65,7 @@ button { cursor: pointer; border: 0; background: none; padding: 0; }
 .btn.danger { color: #E11D48; }
 .btn.danger:hover { background: color-mix(in srgb, #E11D48 10%, transparent); }
 
-textarea, input[type="text"], input[type="number"], input[type="time"], input[type="date"], select {
+textarea, input[type="text"], input[type="email"], input[type="password"], input[type="number"], input[type="time"], input[type="date"], select {
   width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
   padding: 9px 12px; outline: none; transition: border-color .15s, box-shadow .15s;
 }

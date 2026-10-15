@@ -43,8 +43,10 @@ function harness() {
     nativeImage: { createFromPath() {} }, nativeTheme: new EventEmitter(), powerMonitor,
     clipboard: { writeText: text => { copied = text; } },
   };
+  // Signed-out cloud sync: the scheduler must behave exactly as without an account.
+  class TestSync { constructor() { this.lastError = null; } status() { return Promise.resolve({ signedIn: false }); } run() { return Promise.resolve({ changed: false }); } }
   const context = vm.createContext({
-    require: name => name === 'electron' ? electron : name === './store' ? { Store: TestStore } : name === '../shared/core' ? WT : name === './report' ? {} : require(name),
+    require: name => name === 'electron' ? electron : name === './store' ? { Store: TestStore } : name === './sync' ? { Sync: TestSync } : name === '../shared/core' ? WT : name === './report' ? {} : require(name),
     __dirname: path.resolve(__dirname, '../src/main'), process: { argv: ['--hidden'], execPath: '' },
     Date: Clock, setInterval() {}, setTimeout() {}, console,
   });

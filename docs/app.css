@@ -121,6 +121,7 @@ input, select, textarea { font-size: 16px; } /* prevents iOS zoom on focus */
 .auth input { height: 50px; border-radius: 13px; }
 
 /* Tab bar */
+.tabbar[hidden] { display: none; }
 .tabbar {
   position: fixed; inset: auto 0 0 0; z-index: 10; display: grid; grid-template-columns: repeat(4, 1fr);
   padding: 6px 8px calc(6px + env(safe-area-inset-bottom));

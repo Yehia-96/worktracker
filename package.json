@@ -1,14 +1,14 @@
 {
   "name": "worktracker",
   "productName": "Work Tracker",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Daily office / home office / Dienstreise tracker with a yearly summary for the tax return.",
   "main": "src/main/main.js",
   "private": true,
   "scripts": {
     "start": "electron .",
     "icons": "node scripts/make-icons.js",
-    "test": "node scripts/test-core.js && node --test scripts/test-linux-practice.js scripts/test-main.js scripts/test-webpush.mjs",
+    "test": "node scripts/test-core.js && node --test scripts/test-linux-practice.js scripts/test-main.js scripts/test-sync.js scripts/test-webpush.mjs",
     "dist": "electron-builder --win",
     "build:web": "node scripts/build-shared.js"
   },
