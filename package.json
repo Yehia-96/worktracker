@@ -1,0 +1,43 @@
+{
+  "name": "worktracker",
+  "productName": "Work Tracker",
+  "version": "1.2.0",
+  "description": "Daily office / home office / Dienstreise tracker with a yearly summary for the tax return.",
+  "main": "src/main/main.js",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "icons": "node scripts/make-icons.js",
+    "test": "node scripts/test-core.js && node --test scripts/test-linux-practice.js scripts/test-main.js scripts/test-webpush.mjs",
+    "dist": "electron-builder --win",
+    "build:web": "node scripts/build-shared.js"
+  },
+  "build": {
+    "appId": "com.yehia.worktracker",
+    "productName": "Work Tracker",
+    "files": [
+      "src/**",
+      "renderer/**",
+      "assets/**",
+      "package.json"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon.png"
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "shortcutName": "Work Tracker"
+    }
+  },
+  "devDependencies": {
+    "electron": "^44.7.0",
+    "electron-builder": "^26.15.3",
+    "http_ece": "^1.2.1",
+    "supabase": "^2.121.0"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.118.0"
+  }
+}

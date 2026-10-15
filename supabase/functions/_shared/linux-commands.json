@@ -1,0 +1,1401 @@
+[
+  {
+    "id": "pwd",
+    "category": "Files & directories",
+    "name": "pwd",
+    "description": "Print the full path of your current directory.",
+    "syntax": "pwd [OPTION]",
+    "examples": [
+      "pwd",
+      "pwd -P"
+    ],
+    "exercise": "Change to your home directory with cd ~, then print its full path."
+  },
+  {
+    "id": "ls",
+    "category": "Files & directories",
+    "name": "ls",
+    "description": "List directory contents. -l shows details; -a includes hidden entries.",
+    "syntax": "ls [OPTIONS] [PATH...]",
+    "examples": [
+      "ls -lah .",
+      "ls -lt /tmp"
+    ],
+    "exercise": "List your home directory including hidden files, with human-readable sizes."
+  },
+  {
+    "id": "cd",
+    "category": "Files & directories",
+    "name": "cd",
+    "description": "Change the shell's current directory. cd - returns to the previous directory.",
+    "syntax": "cd [DIRECTORY]",
+    "examples": [
+      "cd ~",
+      "cd .."
+    ],
+    "exercise": "Go to /tmp, return with cd -, then confirm your location with pwd."
+  },
+  {
+    "id": "mkdir",
+    "category": "Files & directories",
+    "name": "mkdir",
+    "description": "Create directories. -p also creates missing parent directories.",
+    "syntax": "mkdir [OPTIONS] DIRECTORY...",
+    "examples": [
+      "mkdir -p ~/linux-practice/notes",
+      "mkdir -p ~/linux-practice/logs"
+    ],
+    "exercise": "Create a projects/demo directory inside ~/linux-practice, then list it."
+  },
+  {
+    "id": "find",
+    "category": "Files & directories",
+    "name": "find",
+    "description": "Search a directory tree by name, type, or other conditions. Quote patterns so the shell does not expand them.",
+    "syntax": "find [PATH...] [EXPRESSION]",
+    "examples": [
+      "find . -maxdepth 2 -type f",
+      "find . -type f -name '*.txt'"
+    ],
+    "exercise": "In a practice folder, find only directories no more than two levels deep."
+  },
+  {
+    "id": "cat",
+    "category": "Text processing",
+    "name": "cat",
+    "description": "Print files or combine their contents. -n adds line numbers.",
+    "syntax": "cat [OPTIONS] [FILE...]",
+    "examples": [
+      "cat /etc/os-release",
+      "cat -n /etc/os-release"
+    ],
+    "exercise": "Print /etc/os-release with line numbers and identify the distribution name."
+  },
+  {
+    "id": "grep",
+    "category": "Text processing",
+    "name": "grep",
+    "description": "Print lines matching a pattern. -n adds line numbers; -i ignores case.",
+    "syntax": "grep [OPTIONS] PATTERN [FILE...]",
+    "examples": [
+      "grep -n 'NAME' /etc/os-release",
+      "printf 'error\\nOK\\nERROR\\n' | grep -i 'error'"
+    ],
+    "exercise": "Filter three sample lines to show only those containing error, regardless of case."
+  },
+  {
+    "id": "sort",
+    "category": "Text processing",
+    "name": "sort",
+    "description": "Sort lines of text. -n sorts numbers by value; -u removes duplicate lines.",
+    "syntax": "sort [OPTIONS] [FILE...]",
+    "examples": [
+      "printf 'pear\\napple\\npear\\n' | sort -u",
+      "printf '10\\n2\\n30\\n' | sort -n"
+    ],
+    "exercise": "Sort the numbers 9, 100, and 2 in descending numeric order using -nr."
+  },
+  {
+    "id": "sed",
+    "category": "Text processing",
+    "name": "sed",
+    "description": "Transform a text stream. A substitution changes matching text in the output; these examples do not edit files.",
+    "syntax": "sed [OPTIONS] 'SCRIPT' [FILE...]",
+    "examples": [
+      "printf 'hello world\\n' | sed 's/world/Linux/'",
+      "printf 'one\\ntwo\\nthree\\n' | sed -n '2p'"
+    ],
+    "exercise": "Replace every occurrence of cat with dog in a sample line using s/cat/dog/g."
+  },
+  {
+    "id": "awk",
+    "category": "Text processing",
+    "name": "awk",
+    "description": "Process text as records and fields. By default, fields are separated by whitespace; $1 is the first field.",
+    "syntax": "awk [OPTIONS] 'PATTERN { ACTION }' [FILE...]",
+    "examples": [
+      "printf 'Alice 3\\nBob 5\\n' | awk '{print $1}'",
+      "printf 'Alice 3\\nBob 5\\n' | awk '{sum += $2} END {print sum}'"
+    ],
+    "exercise": "Print only names whose second field is greater than 3."
+  },
+  {
+    "id": "ps",
+    "category": "Processes",
+    "name": "ps",
+    "description": "Show a snapshot of running processes. Output can include the process ID, parent ID, and command.",
+    "syntax": "ps [OPTIONS]",
+    "examples": [
+      "ps -ef",
+      "ps -p $$ -o pid,ppid,comm"
+    ],
+    "exercise": "Find your current shell's process ID and parent process ID using the second example."
+  },
+  {
+    "id": "top",
+    "category": "Processes",
+    "name": "top",
+    "description": "Display a live view of processes and resource use. Press q to quit the interactive view.",
+    "syntax": "top [OPTIONS]",
+    "examples": [
+      "top",
+      "top -b -n 1"
+    ],
+    "exercise": "Open top, identify a process using CPU, then exit with q."
+  },
+  {
+    "id": "pgrep",
+    "category": "Processes",
+    "name": "pgrep",
+    "description": "Find process IDs by name. -a includes the full command line in the output.",
+    "syntax": "pgrep [OPTIONS] PATTERN",
+    "examples": [
+      "pgrep -a bash",
+      "pgrep -a -u \"$(id -u)\""
+    ],
+    "exercise": "List processes owned by your user. An empty name search simply means no match."
+  },
+  {
+    "id": "jobs",
+    "category": "Processes",
+    "name": "jobs",
+    "description": "List background or stopped jobs belonging to the current shell. -l also shows process IDs.",
+    "syntax": "jobs [-l]",
+    "examples": [
+      "sleep 30 &\njobs -l"
+    ],
+    "exercise": "Start a short sleep in the background and inspect it with jobs before it finishes."
+  },
+  {
+    "id": "kill",
+    "category": "Processes",
+    "name": "kill",
+    "description": "Send a signal to a process. TERM asks it to stop gracefully. Use only the disposable sleep process in this example.",
+    "syntax": "kill [-SIGNAL] PID...",
+    "examples": [
+      "sleep 60 &\npractice_pid=$!\nkill -TERM \"$practice_pid\""
+    ],
+    "exercise": "Run the example, then use jobs to check that your test sleep has ended."
+  },
+  {
+    "id": "chmod",
+    "category": "Permissions",
+    "name": "chmod",
+    "description": "Change file permission bits. u means owner, g means group, and o means others.",
+    "syntax": "chmod [OPTIONS] MODE FILE...",
+    "examples": [
+      "touch practice-permissions.txt\nchmod u=rw,go= practice-permissions.txt\nls -l practice-permissions.txt"
+    ],
+    "exercise": "In a practice folder, make a new file readable and writable only by its owner."
+  },
+  {
+    "id": "umask",
+    "category": "Permissions",
+    "name": "umask",
+    "description": "Show or set the permission mask used when creating files and directories. A subshell keeps the example's change local.",
+    "syntax": "umask [-S] [MASK]",
+    "examples": [
+      "umask -S",
+      "(umask 077; touch practice-private.txt; ls -l practice-private.txt)"
+    ],
+    "exercise": "Run the second example with a new filename and inspect its owner-only permissions."
+  },
+  {
+    "id": "id",
+    "category": "Permissions",
+    "name": "id",
+    "description": "Show user and group IDs. -un prints the current username; -Gn prints group names.",
+    "syntax": "id [OPTIONS] [USER]",
+    "examples": [
+      "id",
+      "id -Gn"
+    ],
+    "exercise": "Print just your username, then list the groups you belong to."
+  },
+  {
+    "id": "stat",
+    "category": "Permissions",
+    "name": "stat",
+    "description": "Display file metadata, including permissions, ownership, size, and timestamps.",
+    "syntax": "stat [OPTIONS] FILE...",
+    "examples": [
+      "stat /etc/os-release",
+      "stat -c '%A %U %G %n' /etc/os-release"
+    ],
+    "exercise": "Inspect a file in your home directory and identify its owner and permission bits."
+  },
+  {
+    "id": "test",
+    "category": "Permissions",
+    "name": "test",
+    "description": "Check a condition via its exit status. -r checks readability, -w writability, and -d whether a path is a directory.",
+    "syntax": "test EXPRESSION",
+    "examples": [
+      "test -r /etc/os-release && printf 'Readable\\n'",
+      "test -d \"$HOME\" && printf 'Home exists\\n'"
+    ],
+    "exercise": "Check whether a practice file is writable and print a message when it is."
+  },
+  {
+    "id": "ip",
+    "category": "Networking",
+    "name": "ip",
+    "description": "Inspect network interfaces and routing information on Linux.",
+    "syntax": "ip [OPTIONS] OBJECT COMMAND",
+    "examples": [
+      "ip -brief address",
+      "ip route show"
+    ],
+    "exercise": "Identify the loopback interface and the default route, if one is configured."
+  },
+  {
+    "id": "ping",
+    "category": "Networking",
+    "name": "ping",
+    "description": "Send ICMP echo requests to test reachability. -c limits the number of requests.",
+    "syntax": "ping [OPTIONS] HOST",
+    "examples": [
+      "ping -c 3 127.0.0.1",
+      "ping -c 3 ::1"
+    ],
+    "exercise": "Ping the local loopback address three times and read the packet-loss summary."
+  },
+  {
+    "id": "ss",
+    "category": "Networking",
+    "name": "ss",
+    "description": "Inspect network sockets. -l shows listening sockets, -t TCP, -u UDP, and -n numeric addresses.",
+    "syntax": "ss [OPTIONS]",
+    "examples": [
+      "ss -ltn",
+      "ss -lun"
+    ],
+    "exercise": "List listening TCP sockets and identify their local port numbers."
+  },
+  {
+    "id": "curl",
+    "category": "Networking",
+    "name": "curl",
+    "description": "Transfer data from a URL. -I requests HTTP headers; -L follows redirects. Requires curl and network access.",
+    "syntax": "curl [OPTIONS] URL",
+    "examples": [
+      "curl -I --max-time 10 https://example.com",
+      "curl -L --max-time 10 https://example.com"
+    ],
+    "exercise": "Request example.com's headers and locate the HTTP status and content type."
+  },
+  {
+    "id": "getent",
+    "category": "Networking",
+    "name": "getent",
+    "description": "Query system name-service databases, including hostnames and user accounts.",
+    "syntax": "getent DATABASE [KEY...]",
+    "examples": [
+      "getent hosts localhost",
+      "getent ahosts example.com"
+    ],
+    "exercise": "Resolve localhost and compare the returned address with the loopback interface."
+  },
+  {
+    "id": "tar",
+    "category": "Archives",
+    "name": "tar",
+    "description": "Create or list archives. -c creates, -t lists, -z uses gzip, and -f specifies the archive file.",
+    "syntax": "tar -czf ARCHIVE DIRECTORY\ntar -tzf ARCHIVE",
+    "examples": [
+      "mkdir -p practice-archive\ntouch practice-archive/hello.txt\ntar -czf practice-demo.tar.gz practice-archive",
+      "tar -tzf practice-demo.tar.gz"
+    ],
+    "exercise": "Create the sample archive, then list its contents without extracting it."
+  },
+  {
+    "id": "gzip",
+    "category": "Archives",
+    "name": "gzip",
+    "description": "Compress a file. -c writes compressed data to standard output, keeping the original intact.",
+    "syntax": "gzip [OPTIONS] [FILE...]",
+    "examples": [
+      "printf 'sample text\\n' > practice-gzip.txt\ngzip -c practice-gzip.txt > practice-gzip.txt.gz",
+      "gzip -l practice-gzip.txt.gz"
+    ],
+    "exercise": "Compress a sample file while keeping the original, then inspect its compressed size."
+  },
+  {
+    "id": "gunzip",
+    "category": "Archives",
+    "name": "gunzip",
+    "description": "Decompress gzip data. -c prints the result without deleting the compressed file.",
+    "syntax": "gunzip [OPTIONS] [FILE...]",
+    "examples": [
+      "printf 'hello Linux\\n' | gzip | gunzip -c"
+    ],
+    "exercise": "Pipe a short sentence through gzip and gunzip and confirm it comes back unchanged."
+  },
+  {
+    "id": "zip",
+    "category": "Archives",
+    "name": "zip",
+    "description": "Create ZIP archives. -r includes a directory recursively. Requires the zip utility.",
+    "syntax": "zip [OPTIONS] ARCHIVE FILE...",
+    "examples": [
+      "mkdir -p practice-zip\ntouch practice-zip/hello.txt\nzip -r practice-demo.zip practice-zip"
+    ],
+    "exercise": "Archive a practice folder and inspect the filenames reported by zip."
+  },
+  {
+    "id": "unzip",
+    "category": "Archives",
+    "name": "unzip",
+    "description": "List, test, or extract ZIP archives. Requires unzip and a ZIP file; create practice-demo.zip in the zip lesson first.",
+    "syntax": "unzip [OPTIONS] ARCHIVE",
+    "examples": [
+      "unzip -l practice-demo.zip",
+      "unzip -t practice-demo.zip"
+    ],
+    "exercise": "List and test a practice ZIP archive without extracting or overwriting files."
+  },
+  {
+    "id": "git-status",
+    "category": "Git basics",
+    "name": "git status",
+    "description": "Show the state of a Git working tree and staging area. Run inside a Git repository.",
+    "syntax": "git status [OPTIONS]",
+    "examples": [
+      "git status",
+      "git status --short"
+    ],
+    "exercise": "In a practice repository, compare the full status with the short status output."
+  },
+  {
+    "id": "git-diff",
+    "category": "Git basics",
+    "name": "git diff",
+    "description": "Show changes. By default it compares working files to the staging area; --staged shows staged changes.",
+    "syntax": "git diff [OPTIONS] [-- PATH...]",
+    "examples": [
+      "git diff",
+      "git diff --staged"
+    ],
+    "exercise": "Edit a file in a practice repository and inspect its changed lines with git diff."
+  },
+  {
+    "id": "git-log",
+    "category": "Git basics",
+    "name": "git log",
+    "description": "Browse commit history. --oneline condenses each commit; -5 limits the output.",
+    "syntax": "git log [OPTIONS]",
+    "examples": [
+      "git log --oneline -5",
+      "git log --oneline --graph --all -10"
+    ],
+    "exercise": "Find the newest commit's short ID and message in an existing practice repository."
+  },
+  {
+    "id": "git-branch",
+    "category": "Git basics",
+    "name": "git branch",
+    "description": "List local branches or create a new branch. Creating a branch does not switch to it.",
+    "syntax": "git branch [OPTIONS] [NAME]",
+    "examples": [
+      "git branch",
+      "git branch --all"
+    ],
+    "exercise": "List branches and identify the current one, marked with an asterisk."
+  },
+  {
+    "id": "git-show",
+    "category": "Git basics",
+    "name": "git show",
+    "description": "Inspect a commit or another Git object. HEAD refers to the current commit.",
+    "syntax": "git show [OPTIONS] [OBJECT]",
+    "examples": [
+      "git show --stat HEAD",
+      "git show --format=fuller --no-patch HEAD"
+    ],
+    "exercise": "Inspect the latest commit's author and the list of files changed."
+  },
+  {
+    "id": "man",
+    "category": "Shell & system",
+    "name": "man",
+    "description": "Open a command's manual page. In the usual pager, / searches and q quits. Requires installed manual pages.",
+    "syntax": "man [SECTION] NAME",
+    "examples": [
+      "man ls",
+      "man 5 passwd"
+    ],
+    "exercise": "Open the ls manual, search for human-readable, then quit with q."
+  },
+  {
+    "id": "printf",
+    "category": "Shell & system",
+    "name": "printf",
+    "description": "Print formatted text. Use a fixed format string and pass values as separate arguments.",
+    "syntax": "printf FORMAT [ARGUMENT...]",
+    "examples": [
+      "printf 'Hello, %s!\\n' Linux",
+      "printf '%s\\n' one two three"
+    ],
+    "exercise": "Print three filenames, each on its own line, using one printf command."
+  },
+  {
+    "id": "df",
+    "category": "Shell & system",
+    "name": "df",
+    "description": "Show filesystem space usage. -h uses human-readable units.",
+    "syntax": "df [OPTIONS] [PATH...]",
+    "examples": [
+      "df -h",
+      "df -h ."
+    ],
+    "exercise": "Find the available space on the filesystem containing your current directory."
+  },
+  {
+    "id": "du",
+    "category": "Shell & system",
+    "name": "du",
+    "description": "Estimate disk space used by files and directories. -s gives a total; -h uses readable units.",
+    "syntax": "du [OPTIONS] [PATH...]",
+    "examples": [
+      "du -sh .",
+      "du -h --max-depth=1 ."
+    ],
+    "exercise": "In a small practice folder, compare its total size with the size of each subdirectory."
+  },
+  {
+    "id": "wc",
+    "category": "Shell & system",
+    "name": "wc",
+    "description": "Count newlines, words, and bytes. -l counts newline characters; -w counts words.",
+    "syntax": "wc [OPTIONS] [FILE...]",
+    "examples": [
+      "printf 'one two\\nthree\\n' | wc -w",
+      "printf 'one\\ntwo\\n' | wc -l"
+    ],
+    "exercise": "Create three lines of sample text and check both their line count and word count."
+  },
+  {
+    "id": "touch",
+    "category": "Files & directories",
+    "name": "touch",
+    "description": "Create an empty file, or update the timestamp of an existing one.",
+    "syntax": "touch FILE...",
+    "examples": [
+      "touch notes.txt",
+      "touch a.txt b.txt c.txt"
+    ],
+    "exercise": "Create three empty files in a practice folder, then list them with ls -l."
+  },
+  {
+    "id": "cp",
+    "category": "Files & directories",
+    "name": "cp",
+    "description": "Copy files or directories.",
+    "syntax": "cp [OPTION] SOURCE DEST",
+    "examples": [
+      "cp notes.txt notes.bak",
+      "cp -r project/ project_backup/"
+    ],
+    "exercise": "Copy a folder recursively with cp -r and compare both with ls."
+  },
+  {
+    "id": "mv",
+    "category": "Files & directories",
+    "name": "mv",
+    "description": "Move or rename files and directories.",
+    "syntax": "mv [OPTION] SOURCE DEST",
+    "examples": [
+      "mv draft.txt final.txt",
+      "mv *.log logs/"
+    ],
+    "exercise": "Rename a file, then move it into a new subfolder."
+  },
+  {
+    "id": "rm",
+    "category": "Files & directories",
+    "name": "rm",
+    "description": "Remove files or directories. There is no trash — deleted is gone.",
+    "syntax": "rm [OPTION] FILE...",
+    "examples": [
+      "rm old.txt",
+      "rm -ri tmp_folder/"
+    ],
+    "exercise": "Delete a test folder with rm -ri so it asks before each file."
+  },
+  {
+    "id": "rmdir",
+    "category": "Files & directories",
+    "name": "rmdir",
+    "description": "Remove an empty directory.",
+    "syntax": "rmdir DIRECTORY",
+    "examples": [
+      "rmdir empty_dir",
+      "mkdir -p a/b && rmdir -p a/b"
+    ],
+    "exercise": "Try rmdir on a non-empty folder and read the error message."
+  },
+  {
+    "id": "ln",
+    "category": "Files & directories",
+    "name": "ln",
+    "description": "Create links between files; -s makes a symbolic link (shortcut).",
+    "syntax": "ln -s TARGET LINK_NAME",
+    "examples": [
+      "ln -s /data/datasets ~/datasets",
+      "ls -l ~/datasets"
+    ],
+    "exercise": "Make a symlink to a deep folder in your home directory and cd through it."
+  },
+  {
+    "id": "tree",
+    "category": "Files & directories",
+    "name": "tree",
+    "description": "Show a directory as an indented tree.",
+    "syntax": "tree [OPTION] [DIR]",
+    "examples": [
+      "tree -L 2",
+      "tree -d project/"
+    ],
+    "exercise": "Show only the first two levels of a project folder."
+  },
+  {
+    "id": "file",
+    "category": "Files & directories",
+    "name": "file",
+    "description": "Guess what kind of data a file contains.",
+    "syntax": "file FILE...",
+    "examples": [
+      "file model.pt",
+      "file *"
+    ],
+    "exercise": "Run file on an image, a script and a binary and compare the results."
+  },
+  {
+    "id": "realpath",
+    "category": "Files & directories",
+    "name": "realpath",
+    "description": "Print the absolute, resolved path of a file.",
+    "syntax": "realpath FILE",
+    "examples": [
+      "realpath ../data",
+      "realpath ~/datasets"
+    ],
+    "exercise": "Resolve a symlink you created with ln -s."
+  },
+  {
+    "id": "head",
+    "category": "Text processing",
+    "name": "head",
+    "description": "Show the first lines of a file (10 by default).",
+    "syntax": "head [-n N] FILE",
+    "examples": [
+      "head train.log",
+      "head -n 3 data.csv"
+    ],
+    "exercise": "Print only the header row of a CSV file."
+  },
+  {
+    "id": "tail",
+    "category": "Text processing",
+    "name": "tail",
+    "description": "Show the last lines of a file; -f keeps following new lines.",
+    "syntax": "tail [-n N] [-f] FILE",
+    "examples": [
+      "tail -n 20 train.log",
+      "tail -f train.log"
+    ],
+    "exercise": "Follow a log file with tail -f while appending to it from another terminal; stop with Ctrl+C."
+  },
+  {
+    "id": "less",
+    "category": "Text processing",
+    "name": "less",
+    "description": "Scroll through a file page by page. q quits, / searches.",
+    "syntax": "less FILE",
+    "examples": [
+      "less train.log",
+      "ps aux | less"
+    ],
+    "exercise": "Open a long file, search for a word with /word and jump with n."
+  },
+  {
+    "id": "cut",
+    "category": "Text processing",
+    "name": "cut",
+    "description": "Extract columns from each line.",
+    "syntax": "cut -d DELIM -f FIELDS FILE",
+    "examples": [
+      "cut -d, -f1,3 data.csv",
+      "cut -d: -f1 /etc/passwd"
+    ],
+    "exercise": "Print just the usernames from /etc/passwd."
+  },
+  {
+    "id": "uniq",
+    "category": "Text processing",
+    "name": "uniq",
+    "description": "Collapse repeated adjacent lines; usually used after sort.",
+    "syntax": "uniq [-c] [FILE]",
+    "examples": [
+      "sort names.txt | uniq",
+      "sort names.txt | uniq -c | sort -rn"
+    ],
+    "exercise": "Count how often each word appears in a file."
+  },
+  {
+    "id": "tr",
+    "category": "Text processing",
+    "name": "tr",
+    "description": "Translate or delete characters from standard input.",
+    "syntax": "tr SET1 SET2",
+    "examples": [
+      "echo hello | tr a-z A-Z",
+      "tr -d '\\r' < win.txt > unix.txt"
+    ],
+    "exercise": "Convert a sentence to upper case with tr."
+  },
+  {
+    "id": "tee",
+    "category": "Text processing",
+    "name": "tee",
+    "description": "Write output to the screen and to a file at the same time.",
+    "syntax": "COMMAND | tee [-a] FILE",
+    "examples": [
+      "python train.py | tee train.log",
+      "echo done | tee -a log.txt"
+    ],
+    "exercise": "Run ls -l and save the output to a file while still seeing it."
+  },
+  {
+    "id": "diff",
+    "category": "Text processing",
+    "name": "diff",
+    "description": "Show line-by-line differences between two files.",
+    "syntax": "diff [-u] FILE1 FILE2",
+    "examples": [
+      "diff old.yaml new.yaml",
+      "diff -u a.py b.py"
+    ],
+    "exercise": "Copy a file, change one line, and diff the two."
+  },
+  {
+    "id": "xargs",
+    "category": "Text processing",
+    "name": "xargs",
+    "description": "Turn input lines into arguments for another command.",
+    "syntax": "COMMAND | xargs OTHER_COMMAND",
+    "examples": [
+      "find . -name '*.tmp' | xargs rm",
+      "cat urls.txt | xargs -n1 curl -O"
+    ],
+    "exercise": "List all .txt files with find and count their lines using xargs wc -l."
+  },
+  {
+    "id": "paste",
+    "category": "Text processing",
+    "name": "paste",
+    "description": "Join files side by side, line by line.",
+    "syntax": "paste [-d DELIM] FILE1 FILE2",
+    "examples": [
+      "paste names.txt scores.txt",
+      "paste -d, a.txt b.txt"
+    ],
+    "exercise": "Combine two single-column files into one CSV."
+  },
+  {
+    "id": "htop",
+    "category": "Processes",
+    "name": "htop",
+    "description": "Interactive, colourful process viewer (CPU, memory, per core).",
+    "syntax": "htop [-u USER]",
+    "examples": [
+      "htop",
+      "htop -u $USER"
+    ],
+    "exercise": "Open htop, sort by memory with F6, then quit with q."
+  },
+  {
+    "id": "nohup",
+    "category": "Processes",
+    "name": "nohup",
+    "description": "Run a command that keeps going after you log out.",
+    "syntax": "nohup COMMAND &",
+    "examples": [
+      "nohup python train.py > train.log 2>&1 &",
+      "tail -f train.log"
+    ],
+    "exercise": "Start sleep 300 with nohup, log out, log back in and find it with pgrep."
+  },
+  {
+    "id": "fg-bg",
+    "category": "Processes",
+    "name": "fg / bg",
+    "description": "Move a suspended job to the foreground (fg) or background (bg). Ctrl+Z suspends.",
+    "syntax": "fg [%JOB] / bg [%JOB]",
+    "examples": [
+      "sleep 100   # then Ctrl+Z",
+      "bg %1 && jobs"
+    ],
+    "exercise": "Suspend a running sleep with Ctrl+Z, resume it in the background, then bring it back with fg."
+  },
+  {
+    "id": "pkill",
+    "category": "Processes",
+    "name": "pkill",
+    "description": "Kill processes by name instead of PID.",
+    "syntax": "pkill [-SIGNAL] PATTERN",
+    "examples": [
+      "pkill -f train.py",
+      "pkill -u $USER python"
+    ],
+    "exercise": "Start two sleep processes and stop both with one pkill."
+  },
+  {
+    "id": "nice",
+    "category": "Processes",
+    "name": "nice / renice",
+    "description": "Start a process with lower priority, or change it later.",
+    "syntax": "nice -n N COMMAND / renice N -p PID",
+    "examples": [
+      "nice -n 10 python preprocess.py",
+      "renice 15 -p 12345"
+    ],
+    "exercise": "Start a long command with nice and check its NI column in top."
+  },
+  {
+    "id": "watch",
+    "category": "Processes",
+    "name": "watch",
+    "description": "Re-run a command every few seconds and show the output.",
+    "syntax": "watch [-n SEC] COMMAND",
+    "examples": [
+      "watch -n 1 nvidia-smi",
+      "watch 'ls -l | wc -l'"
+    ],
+    "exercise": "Watch a folder fill up while you create files in another terminal."
+  },
+  {
+    "id": "timeout",
+    "category": "Processes",
+    "name": "timeout",
+    "description": "Run a command but kill it after a time limit.",
+    "syntax": "timeout DURATION COMMAND",
+    "examples": [
+      "timeout 10s ping google.com",
+      "timeout 2h python train.py"
+    ],
+    "exercise": "Run sleep 30 with a 5 second timeout and check the exit code with echo $?."
+  },
+  {
+    "id": "lsof",
+    "category": "Processes",
+    "name": "lsof",
+    "description": "List open files and which process holds them (also ports).",
+    "syntax": "lsof [-i :PORT] [FILE]",
+    "examples": [
+      "lsof -i :5555",
+      "lsof +D /data/run1"
+    ],
+    "exercise": "Find which process is using a given port on the DGX."
+  },
+  {
+    "id": "time",
+    "category": "Processes",
+    "name": "time",
+    "description": "Measure how long a command takes.",
+    "syntax": "time COMMAND",
+    "examples": [
+      "time python eval.py",
+      "time tar -czf a.tgz data/"
+    ],
+    "exercise": "Compare how long gzip and xz take to compress the same file."
+  },
+  {
+    "id": "chown",
+    "category": "Permissions",
+    "name": "chown",
+    "description": "Change the owner (and group) of files.",
+    "syntax": "chown [-R] USER[:GROUP] FILE",
+    "examples": [
+      "sudo chown $USER file.txt",
+      "sudo chown -R $USER:$USER project/"
+    ],
+    "exercise": "Check a file owner with ls -l, then read man chown to see why it needs sudo."
+  },
+  {
+    "id": "chgrp",
+    "category": "Permissions",
+    "name": "chgrp",
+    "description": "Change the group of files.",
+    "syntax": "chgrp [-R] GROUP FILE",
+    "examples": [
+      "chgrp lab shared.txt",
+      "chgrp -R lab shared/"
+    ],
+    "exercise": "List your groups with groups, then change a test file to one of them."
+  },
+  {
+    "id": "sudo",
+    "category": "Permissions",
+    "name": "sudo",
+    "description": "Run a command as another user, usually root. Use with care.",
+    "syntax": "sudo COMMAND",
+    "examples": [
+      "sudo apt update",
+      "sudo -l"
+    ],
+    "exercise": "Run sudo -l to see what you are allowed to run as root."
+  },
+  {
+    "id": "groups",
+    "category": "Permissions",
+    "name": "groups",
+    "description": "Show which groups a user belongs to.",
+    "syntax": "groups [USER]",
+    "examples": [
+      "groups",
+      "groups $USER"
+    ],
+    "exercise": "Check whether you are in the docker group on the DGX."
+  },
+  {
+    "id": "whoami",
+    "category": "Permissions",
+    "name": "whoami",
+    "description": "Print your current username.",
+    "syntax": "whoami",
+    "examples": [
+      "whoami",
+      "sudo whoami"
+    ],
+    "exercise": "Compare whoami with and without sudo."
+  },
+  {
+    "id": "wget",
+    "category": "Networking",
+    "name": "wget",
+    "description": "Download files from the web; resumes with -c.",
+    "syntax": "wget [OPTION] URL",
+    "examples": [
+      "wget https://example.com/file.zip",
+      "wget -c -O data.tgz URL"
+    ],
+    "exercise": "Download a small file and resume an interrupted download with -c."
+  },
+  {
+    "id": "ssh",
+    "category": "Networking",
+    "name": "ssh",
+    "description": "Log in to a remote machine or run a command there.",
+    "syntax": "ssh [USER@]HOST [COMMAND]",
+    "examples": [
+      "ssh dgx",
+      "ssh dgx 'nvidia-smi'"
+    ],
+    "exercise": "Run one command on the DGX without opening an interactive shell."
+  },
+  {
+    "id": "scp",
+    "category": "Networking",
+    "name": "scp",
+    "description": "Copy files between machines over SSH.",
+    "syntax": "scp [-r] SOURCE DEST",
+    "examples": [
+      "scp model.pt dgx:~/models/",
+      "scp -r dgx:~/groot_demo/videos ./"
+    ],
+    "exercise": "Copy a small file to the DGX and back."
+  },
+  {
+    "id": "rsync",
+    "category": "Networking",
+    "name": "rsync",
+    "description": "Sync files efficiently; only changed parts are sent. Great for big datasets.",
+    "syntax": "rsync -avh [--progress] SOURCE DEST",
+    "examples": [
+      "rsync -avh --progress data/ dgx:~/data/",
+      "rsync -avh --dry-run src/ dst/"
+    ],
+    "exercise": "Sync a folder twice and notice the second run copies almost nothing."
+  },
+  {
+    "id": "ssh-keygen",
+    "category": "Networking",
+    "name": "ssh-keygen",
+    "description": "Create an SSH key pair for password-less login.",
+    "syntax": "ssh-keygen -t ed25519",
+    "examples": [
+      "ssh-keygen -t ed25519 -C \"laptop\"",
+      "ssh-copy-id dgx"
+    ],
+    "exercise": "Read your public key with cat ~/.ssh/id_ed25519.pub (never share the private one)."
+  },
+  {
+    "id": "hostname",
+    "category": "Networking",
+    "name": "hostname",
+    "description": "Show the machine name and its IP addresses.",
+    "syntax": "hostname [-I]",
+    "examples": [
+      "hostname",
+      "hostname -I"
+    ],
+    "exercise": "Check which node you are on after logging into the cluster."
+  },
+  {
+    "id": "nc",
+    "category": "Networking",
+    "name": "nc (netcat)",
+    "description": "Open raw TCP/UDP connections — handy to test if a port is reachable.",
+    "syntax": "nc [-zv] HOST PORT",
+    "examples": [
+      "nc -zv dgx 22",
+      "nc -l 9000"
+    ],
+    "exercise": "Check whether port 22 is open on a remote host."
+  },
+  {
+    "id": "dig",
+    "category": "Networking",
+    "name": "dig",
+    "description": "Look up DNS records for a domain.",
+    "syntax": "dig [+short] NAME [TYPE]",
+    "examples": [
+      "dig +short github.com",
+      "dig github.com MX"
+    ],
+    "exercise": "Find the IP address of a website with dig +short."
+  },
+  {
+    "id": "zcat",
+    "category": "Archives",
+    "name": "zcat",
+    "description": "Print the contents of a .gz file without unpacking it.",
+    "syntax": "zcat FILE.gz",
+    "examples": [
+      "zcat log.gz | head",
+      "zcat log.gz | grep ERROR"
+    ],
+    "exercise": "Search inside a gzipped log without extracting it."
+  },
+  {
+    "id": "xz",
+    "category": "Archives",
+    "name": "xz",
+    "description": "Compress with a high ratio (slower than gzip).",
+    "syntax": "xz [-d] [-k] FILE",
+    "examples": [
+      "xz -k big.csv",
+      "tar -cJf data.tar.xz data/"
+    ],
+    "exercise": "Compress the same file with gzip and xz and compare sizes with ls -lh."
+  },
+  {
+    "id": "git-init",
+    "category": "Git basics",
+    "name": "git init",
+    "description": "Turn the current folder into a new Git repository.",
+    "syntax": "git init [DIR]",
+    "examples": [
+      "git init",
+      "git init my-project"
+    ],
+    "exercise": "Create a practice repository in a new folder."
+  },
+  {
+    "id": "git-clone",
+    "category": "Git basics",
+    "name": "git clone",
+    "description": "Download a repository with its full history.",
+    "syntax": "git clone URL [DIR]",
+    "examples": [
+      "git clone https://github.com/user/repo.git",
+      "git clone --depth 1 URL"
+    ],
+    "exercise": "Clone a small public repository and look at its log."
+  },
+  {
+    "id": "git-add",
+    "category": "Git basics",
+    "name": "git add",
+    "description": "Stage changes for the next commit.",
+    "syntax": "git add PATH... / git add -p",
+    "examples": [
+      "git add train.py",
+      "git add -p"
+    ],
+    "exercise": "Edit two files, stage only one, and check git status."
+  },
+  {
+    "id": "git-commit",
+    "category": "Git basics",
+    "name": "git commit",
+    "description": "Record staged changes with a message.",
+    "syntax": "git commit -m MESSAGE",
+    "examples": [
+      "git commit -m \"Add data loader\"",
+      "git commit --amend"
+    ],
+    "exercise": "Make three small commits and view them with git log --oneline."
+  },
+  {
+    "id": "git-push",
+    "category": "Git basics",
+    "name": "git push",
+    "description": "Upload your commits to the remote.",
+    "syntax": "git push [REMOTE] [BRANCH]",
+    "examples": [
+      "git push",
+      "git push -u origin feature"
+    ],
+    "exercise": "Push a new branch and set its upstream with -u."
+  },
+  {
+    "id": "git-pull",
+    "category": "Git basics",
+    "name": "git pull",
+    "description": "Fetch and merge changes from the remote.",
+    "syntax": "git pull [--rebase]",
+    "examples": [
+      "git pull",
+      "git pull --rebase"
+    ],
+    "exercise": "Change a file on GitHub, then pull it locally."
+  },
+  {
+    "id": "git-switch",
+    "category": "Git basics",
+    "name": "git switch",
+    "description": "Change branches, or create one with -c.",
+    "syntax": "git switch [-c] BRANCH",
+    "examples": [
+      "git switch -c experiment",
+      "git switch main"
+    ],
+    "exercise": "Create a branch, commit on it, and switch back to main."
+  },
+  {
+    "id": "git-restore",
+    "category": "Git basics",
+    "name": "git restore",
+    "description": "Discard working-tree changes or unstage files.",
+    "syntax": "git restore [--staged] PATH",
+    "examples": [
+      "git restore config.yaml",
+      "git restore --staged train.py"
+    ],
+    "exercise": "Break a file on purpose, then restore it."
+  },
+  {
+    "id": "git-stash",
+    "category": "Git basics",
+    "name": "git stash",
+    "description": "Shelve uncommitted changes temporarily.",
+    "syntax": "git stash [push|pop|list]",
+    "examples": [
+      "git stash",
+      "git stash pop"
+    ],
+    "exercise": "Stash a change, switch branch, come back and pop it."
+  },
+  {
+    "id": "git-remote",
+    "category": "Git basics",
+    "name": "git remote",
+    "description": "List or manage remote repositories.",
+    "syntax": "git remote [-v] / git remote add NAME URL",
+    "examples": [
+      "git remote -v",
+      "git remote add upstream URL"
+    ],
+    "exercise": "Show where your repository pushes and pulls from."
+  },
+  {
+    "id": "git-merge",
+    "category": "Git basics",
+    "name": "git merge",
+    "description": "Combine another branch into the current one.",
+    "syntax": "git merge BRANCH",
+    "examples": [
+      "git merge feature",
+      "git merge --abort"
+    ],
+    "exercise": "Create a merge conflict between two branches and resolve it."
+  },
+  {
+    "id": "echo",
+    "category": "Shell & system",
+    "name": "echo",
+    "description": "Print text or variable values.",
+    "syntax": "echo [TEXT]",
+    "examples": [
+      "echo $HOME",
+      "echo \"export X=1\" >> ~/.bashrc"
+    ],
+    "exercise": "Print your PATH, then append a line to a test file with >>."
+  },
+  {
+    "id": "history",
+    "category": "Shell & system",
+    "name": "history",
+    "description": "Show previously run commands; !N re-runs number N.",
+    "syntax": "history [N]",
+    "examples": [
+      "history 20",
+      "history | grep ssh"
+    ],
+    "exercise": "Find the last ssh command you ran and re-run it with !N. Also try Ctrl+R."
+  },
+  {
+    "id": "alias",
+    "category": "Shell & system",
+    "name": "alias",
+    "description": "Create a shortcut for a longer command.",
+    "syntax": "alias NAME='COMMAND'",
+    "examples": [
+      "alias ll='ls -alh'",
+      "alias gpu='watch -n1 nvidia-smi'"
+    ],
+    "exercise": "Add an alias to ~/.bashrc and reload it with source ~/.bashrc."
+  },
+  {
+    "id": "export",
+    "category": "Shell & system",
+    "name": "export",
+    "description": "Set an environment variable for this shell and its children.",
+    "syntax": "export NAME=VALUE",
+    "examples": [
+      "export CUDA_VISIBLE_DEVICES=3",
+      "CUDA_VISIBLE_DEVICES=1 python train.py"
+    ],
+    "exercise": "Set a variable, start a new bash, and check it is still there with echo."
+  },
+  {
+    "id": "env",
+    "category": "Shell & system",
+    "name": "env",
+    "description": "List environment variables, or run a command with modified ones.",
+    "syntax": "env [NAME=VALUE] [COMMAND]",
+    "examples": [
+      "env | sort",
+      "env | grep CUDA"
+    ],
+    "exercise": "Find every variable that mentions PATH."
+  },
+  {
+    "id": "which",
+    "category": "Shell & system",
+    "name": "which",
+    "description": "Show which executable runs for a command name.",
+    "syntax": "which COMMAND",
+    "examples": [
+      "which python",
+      "which -a python"
+    ],
+    "exercise": "Check which python is used before and after conda activate."
+  },
+  {
+    "id": "type",
+    "category": "Shell & system",
+    "name": "type",
+    "description": "Tell whether a name is an alias, builtin, function or file.",
+    "syntax": "type NAME",
+    "examples": [
+      "type ll",
+      "type cd"
+    ],
+    "exercise": "Compare type cd with type ls."
+  },
+  {
+    "id": "uname",
+    "category": "Shell & system",
+    "name": "uname",
+    "description": "Show kernel and system information.",
+    "syntax": "uname [-a]",
+    "examples": [
+      "uname -a",
+      "uname -m"
+    ],
+    "exercise": "Find out the kernel version and CPU architecture of the DGX."
+  },
+  {
+    "id": "uptime",
+    "category": "Shell & system",
+    "name": "uptime",
+    "description": "Show how long the system has run and its load average.",
+    "syntax": "uptime",
+    "examples": [
+      "uptime",
+      "uptime -p"
+    ],
+    "exercise": "Compare the load average with the number of CPUs from nproc."
+  },
+  {
+    "id": "free",
+    "category": "Shell & system",
+    "name": "free",
+    "description": "Show used and available memory.",
+    "syntax": "free [-h]",
+    "examples": [
+      "free -h",
+      "watch -n 2 free -h"
+    ],
+    "exercise": "Check available RAM before starting a big data-loading job."
+  },
+  {
+    "id": "lsblk",
+    "category": "Shell & system",
+    "name": "lsblk",
+    "description": "List disks and partitions with their mount points.",
+    "syntax": "lsblk [-f]",
+    "examples": [
+      "lsblk",
+      "lsblk -f"
+    ],
+    "exercise": "Find which disk your home directory lives on (combine with df -h ~)."
+  },
+  {
+    "id": "systemctl",
+    "category": "Shell & system",
+    "name": "systemctl",
+    "description": "Inspect and control system services.",
+    "syntax": "systemctl [status|start|stop|restart] SERVICE",
+    "examples": [
+      "systemctl status ssh",
+      "systemctl list-units --failed"
+    ],
+    "exercise": "Check whether the SSH service is running."
+  },
+  {
+    "id": "journalctl",
+    "category": "Shell & system",
+    "name": "journalctl",
+    "description": "Read system and service logs.",
+    "syntax": "journalctl [-u SERVICE] [-f] [--since TIME]",
+    "examples": [
+      "journalctl -u ssh --since today",
+      "journalctl -f"
+    ],
+    "exercise": "Show the last 50 log lines with journalctl -n 50."
+  },
+  {
+    "id": "crontab",
+    "category": "Shell & system",
+    "name": "crontab",
+    "description": "Schedule commands to run automatically.",
+    "syntax": "crontab [-l|-e]",
+    "examples": [
+      "crontab -l",
+      "*/30 * * * * df -h >> ~/disk.log"
+    ],
+    "exercise": "Write a cron line (not installed) that would run a script every day at 03:00."
+  },
+  {
+    "id": "date",
+    "category": "Shell & system",
+    "name": "date",
+    "description": "Print or format the current date and time.",
+    "syntax": "date [+FORMAT]",
+    "examples": [
+      "date",
+      "date +%Y-%m-%d_%H-%M"
+    ],
+    "exercise": "Create a folder named with today's date using mkdir run_$(date +%F)."
+  },
+  {
+    "id": "source",
+    "category": "Shell & system",
+    "name": "source",
+    "description": "Run a script in the current shell (keeps its variables).",
+    "syntax": "source FILE",
+    "examples": [
+      "source ~/.bashrc",
+      "source venv/bin/activate"
+    ],
+    "exercise": "Add an alias to ~/.bashrc and activate it without opening a new terminal."
+  },
+  {
+    "id": "nvidia-smi",
+    "category": "Containers & GPU",
+    "name": "nvidia-smi",
+    "description": "Show GPU usage, memory and running processes.",
+    "syntax": "nvidia-smi [OPTION]",
+    "examples": [
+      "nvidia-smi",
+      "nvidia-smi --query-gpu=index,memory.used,utilization.gpu --format=csv"
+    ],
+    "exercise": "Find which GPUs on the DGX are free right now."
+  },
+  {
+    "id": "tmux",
+    "category": "Containers & GPU",
+    "name": "tmux",
+    "description": "Keep terminal sessions running after you disconnect; split panes.",
+    "syntax": "tmux [new -s NAME | attach -t NAME | ls]",
+    "examples": [
+      "tmux new -s train",
+      "tmux attach -t train"
+    ],
+    "exercise": "Start a tmux session, detach with Ctrl+B then D, and reattach."
+  },
+  {
+    "id": "docker-ps",
+    "category": "Containers & GPU",
+    "name": "docker ps",
+    "description": "List running containers (-a includes stopped ones).",
+    "syntax": "docker ps [-a]",
+    "examples": [
+      "docker ps",
+      "docker ps -a --format \"{{.Names}}\\t{{.Status}}\""
+    ],
+    "exercise": "List all containers on the DGX, including stopped ones."
+  },
+  {
+    "id": "docker-run",
+    "category": "Containers & GPU",
+    "name": "docker run",
+    "description": "Start a new container from an image.",
+    "syntax": "docker run [OPTIONS] IMAGE [COMMAND]",
+    "examples": [
+      "docker run --rm -it ubuntu bash",
+      "docker run --gpus all --rm nvidia/cuda:12.4.0-base-ubuntu22.04 nvidia-smi"
+    ],
+    "exercise": "Start a throwaway Ubuntu container with --rm and exit it."
+  },
+  {
+    "id": "docker-exec",
+    "category": "Containers & GPU",
+    "name": "docker exec",
+    "description": "Run a command inside a running container.",
+    "syntax": "docker exec [-it] CONTAINER COMMAND",
+    "examples": [
+      "docker exec -it mycontainer bash",
+      "docker exec mycontainer ls /workspace"
+    ],
+    "exercise": "Open a shell in a running container and look around."
+  },
+  {
+    "id": "docker-logs",
+    "category": "Containers & GPU",
+    "name": "docker logs",
+    "description": "Show the output of a container.",
+    "syntax": "docker logs [-f] [--tail N] CONTAINER",
+    "examples": [
+      "docker logs --tail 50 mycontainer",
+      "docker logs -f mycontainer"
+    ],
+    "exercise": "Follow the logs of a running container and stop with Ctrl+C."
+  },
+  {
+    "id": "conda",
+    "category": "Containers & GPU",
+    "name": "conda",
+    "description": "Manage Python environments.",
+    "syntax": "conda [create|activate|env list] ...",
+    "examples": [
+      "conda env list",
+      "conda create -n groot python=3.10 && conda activate groot"
+    ],
+    "exercise": "List your environments and check which python is active with which python."
+  }
+]

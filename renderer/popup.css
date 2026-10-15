@@ -1,0 +1,77 @@
+html, body { background: transparent; overflow: hidden; }
+body { padding: 12px 12px 16px; user-select: none; }
+
+.toast-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(16, 24, 40, .22), 0 1px 3px rgba(16, 24, 40, .12);
+  padding: 14px 16px 16px; animation: slide .35s cubic-bezier(.2, .9, .3, 1.15);
+}
+@keyframes slide { from { opacity: 0; transform: translateX(40px); } }
+
+.toast-head { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--muted); margin-bottom: 12px; }
+.toast-head img { width: 16px; height: 16px; }
+.app-name { font-weight: 600; color: var(--text); }
+.close { margin-left: auto; width: 26px; height: 26px; border-radius: 7px; display: grid; place-items: center; color: var(--muted); }
+.close:hover { background: var(--surface-2); color: var(--text); }
+
+h2 { margin: 0; font-size: 16.5px; letter-spacing: -0.01em; }
+.sub { color: var(--muted); font-size: 12.5px; margin-top: 3px; }
+.progress { display: flex; gap: 4px; margin-top: 8px; }
+.progress i { height: 3px; flex: 1; border-radius: 99px; background: var(--surface-2); }
+.progress i.on { background: var(--accent); }
+
+.choices { display: grid; grid-template-columns: repeat(5, 1fr); gap: 7px; margin-top: 14px; }
+.choice {
+  display: flex; flex-direction: column; align-items: center; gap: 7px; padding: 12px 2px 10px;
+  border-radius: 12px; font-size: 11.5px; font-weight: 600; line-height: 1.15; text-align: center;
+  background: color-mix(in srgb, var(--c) var(--tint), var(--surface));
+  color: color-mix(in srgb, var(--c) 78%, var(--text));
+  border: 1.5px solid transparent; transition: transform .12s, background .15s, color .15s, box-shadow .15s;
+}
+.choice .ic { color: var(--c); transition: color .15s; }
+.choice:hover { background: var(--c); color: #fff; transform: translateY(-2px); box-shadow: 0 6px 16px color-mix(in srgb, var(--c) 40%, transparent); }
+.choice:hover .ic, .choice.current .ic { color: #fff; }
+.choice.current { background: var(--c); color: #fff; }
+.choice.picked { background: var(--c); color: #fff; transform: scale(1.06); }
+.choice.picked .ic { color: #fff; }
+
+.foot { display: flex; align-items: center; gap: 6px; margin-top: 12px; }
+.foot .spacer { flex: 1; }
+.foot .btn { height: 32px; padding: 0 12px; font-size: 12.5px; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.chip {
+  display: inline-flex; align-items: center; gap: 5px; height: 28px; padding: 0 10px; border-radius: 99px;
+  font-size: 12px; font-weight: 600; border: 1.5px solid var(--border); color: var(--muted); transition: all .15s;
+}
+.chip .i { color: var(--c); }
+.chip:hover { border-color: var(--c); color: var(--text); }
+.chip.selected { background: var(--c); border-color: var(--c); color: #fff; }
+.chip.selected .i { color: #fff; }
+textarea { margin-top: 12px; min-height: 92px; resize: none; user-select: text; }
+.kbd { font-size: 11px; color: var(--faint); }
+
+.done { display: flex; align-items: center; gap: 12px; padding: 6px 0 2px; }
+.done-ic { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; color: #fff; background: var(--c, #10B981); animation: pop .3s cubic-bezier(.2, .9, .3, 1.4); }
+@keyframes pop { from { transform: scale(.4); opacity: 0; } }
+.done b { display: block; font-size: 15px; }
+
+/* The card remains scrollable on small screens or at high display scaling. */
+body.linux-practice { overflow-y: auto; }
+.practice-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.practice-tag { color: var(--accent); background: var(--accent-soft); border-radius: 6px; padding: 4px 8px; font-size: 12px; font-weight: 700; }
+.practice-category { color: var(--muted); font-size: 12px; margin-top: 16px; }
+.command-name { font-family: Consolas, monospace; font-size: 25px; margin-top: 3px; }
+.practice-description { line-height: 1.5; margin: 10px 0 14px; }
+.practice-label { font-size: 11px; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); font-weight: 700; margin-top: 12px; }
+.linux-practice pre { user-select: text; white-space: pre-wrap; overflow-wrap: anywhere; background: var(--surface-2); border: 1px solid var(--border); border-radius: 9px; padding: 10px; margin: 6px 0; font: 12px/1.5 Consolas, monospace; }
+.practice-example { margin-bottom: 8px; }
+.copy-example { height: 25px; font-size: 11.5px; padding: 0 8px; }
+.practice-exercise { margin-top: 14px; border-left: 3px solid var(--accent); padding: 10px 12px; background: var(--accent-soft); border-radius: 0 8px 8px 0; line-height: 1.45; }
+.practice-exercise b { font-size: 12px; color: var(--accent); }
+.practice-exercise p { margin: 4px 0 0; font-size: 13px; }
+.practice-hint { font-size: 11px; line-height: 1.4; margin-top: 12px; }
+.practice-foot { flex-wrap: wrap; }
+#practice-status { font-size: 11px; color: var(--muted); }
+.linux-practice button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.linux-practice button:disabled { opacity: .5; cursor: wait; }

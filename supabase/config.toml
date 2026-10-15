@@ -1,0 +1,6 @@
+project_id = "ljylvlolddaguzxenxdl"
+
+[functions.send-reminders]
+# Called by pg_cron without a user token. It only sends reminders that are due and
+# de-duplicates via push_log, so extra calls are harmless and reveal nothing.
+verify_jwt = false
